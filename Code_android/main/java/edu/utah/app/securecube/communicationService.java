@@ -77,7 +77,7 @@ public class communicationService extends Service {
                 sendBroadcast(intent);
 
                 //
-                String token = "pattern";
+                //String token = "pattern";
                 String message;
                 MessageDigest digest = null;
                 try {
@@ -88,13 +88,13 @@ public class communicationService extends Service {
                 try {
                     digest.reset();
                     // while(token == null){}
-                    message = digest.digest((command + token).getBytes()).toString();
-                    Log.e("PANKAJ", message);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-
+                message = digest.digest((command + MainActivity.token).getBytes()).toString();
+                Log.e("PANKAJ", message);
+                bsender.write(message, 0, message.length());
                     /*Intent intent = new Intent();
                     intent.setAction(communicationService.MY_ACTION);
 
