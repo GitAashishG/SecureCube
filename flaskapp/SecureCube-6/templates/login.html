@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+{% block body %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<!-- Load stylesheets -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<script src="myscripts.js"> </script>
+	<!-- 
+	<link type="text/css" rel="stylesheet" href="css/style.css" media="screen" />
+	  // Load stylesheets -->	
+
+</head>
+<body>
+
+
+
+	<div id="wrapper">
+		<div id="wrappertop"></div>
+                <form action="/login" method="POST">
+		<div id="wrappermiddle">
+
+			<h2>SecureCube</h2>
+
+			<div id="username_input">
+
+				<div id="username_inputleft"></div>
+
+				<div id="username_inputmiddle">
+				
+					<input type="text" name="username" id="url" value="Username" onclick="this.value = ''">
+					<img id="url_user" src= {{ url_for('static', filename = 'images/useicon.png') }} alt="">
+				
+				</div>
+
+				<div id="username_inputright"></div>
+
+			</div>
+
+			<div id="password_input">
+
+				<div id="password_inputleft"></div>
+
+				<div id="password_inputmiddle">
+				
+					<input type="password" name="password" id="url" value="Password" onclick="this.value = ''">
+					<img id="url_password" src= {{ url_for('static', filename = 'images/passicon.png') }} alt="">
+				
+				</div>
+
+				<div id="password_inputright"></div>
+
+			</div>
+
+			<div id="submit">
+				
+				<!-- <input type="image" src={ url_for('static', filename = 'images/submit_hover.png') }} id="submit1" value="Sign In"  alt="Submit Form"> -->
+				
+				<input type="image" src= {{ url_for('static', filename = 'images/submit.png') }}  id="submit2" value="Sign In"  alt="Submit Form">
+				
+			</div>
+
+            </form>
+
+			<div id="links_left">
+
+			<a href="#">Forgot your Password?</a>
+
+			</div>
+
+			<div id="links_right"><a href="{{ url_for('register') }}">Not a Member Yet?</a></div>
+
+			
+
+		</div>
+
+		<div id="wrapperbottom"></div>
+		<div style="text-align:center"><div style=" display: inline-block;">{% if error %}<p style="color:#D80000 ;margin-left:auto;margin-right:auto">{{ error }}</p>{% endif %}</div></div>
+		<!--<div id="powered">
+		<p>Powered by <a href="http://www.premiumfreebies.eu">Premiumfreebies Control Panel</a></p>
+		</div>-->
+	</div>
+
+</body>
+</html>
+{% endblock %}

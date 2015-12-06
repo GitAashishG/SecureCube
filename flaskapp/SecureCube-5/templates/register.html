@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<!-- Load stylesheets -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<!-- // Load stylesheets -->	
+
+</head>
+<body>
+
+	<div id="wrapper_reg">
+		<div id="wrappertop"></div>
+
+		<div id="wrappermiddle_reg">
+                <form>
+			<h2>SecureCube</h2>
+                        <h5>Username</h5>
+			<div id="username_input_reg">
+
+                                
+				<div id="username_inputleft"></div>
+                                
+
+				<div id="username_inputmiddle">
+
+				
+                                          
+					<input type="text" name="link" id="textbox" value="Username" onclick="this.value = ''">
+					<!--<img id="url_user" src="./images/useicon.png" alt="">-->
+				
+				</div>
+
+				<div id="username_inputright"></div>
+
+			</div>
+
+
+			<h4>Password</h4>	
+			<div id="password_input_reg">
+
+				<div id="password_inputleft"></div>
+
+				<div id="password_inputmiddle">
+				
+					<input type="password" name="link" id="textbox">
+					<!--<img id="url_password" src="./images/passicon.png" alt="">-->
+				
+				</div>
+
+				<div id="password_inputright"></div>
+
+			</div>
+                        <h4>Confirm passord</h4>
+                        <div id="password_input_reg">
+
+				<div id="password_inputleft"></div>
+
+				<div id="password_inputmiddle">
+				
+					<input type="password" name="link" id="textbox">
+					<!--<img id="url_password" src="./images/passicon.png" alt="">-->
+				
+				</div>
+
+				<div id="password_inputright"></div>
+
+			</div>
+
+                        <h4>Phone number</h4>
+                        <div id="username_input_reg">
+
+                                
+				<div id="username_inputleft"></div>
+                                
+
+				<div id="username_inputmiddle">
+
+				
+                                          
+					<input type="text" name="link" id="textbox" value="Username" onclick="this.value = ''">
+					<!--<img id="url_user" src="./images/useicon.png" alt="">-->
+				
+				</div>
+
+				<div id="username_inputright"></div>
+
+			</div>
+
+			<div id="submit_reg">
+				
+				<input type="image" src= {{ url_for('static', filename = 'images/submit.png') }} id="submit1" value="Register" alt="Submit Form">
+				
+				
+			</div>
+
+
+	       </form>
+
+		</div>
+
+		<div id="wrapperbottom"></div>
+		
+		<!--<div id="powered">
+		<p>Powered by <a href="http://www.premiumfreebies.eu">Premiumfreebies Control Panel</a></p>
+		</div>-->
+	</div>
+
+</body>
+</html>
