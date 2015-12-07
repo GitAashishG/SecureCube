@@ -1,7 +1,6 @@
 package edu.utah.app.securecube;
 
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -19,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     MyReceiver myReceiver;
     static String token;
     static char[] pattern;
+    static char [] mypattern;
     Intent intent;
 
     @Override
@@ -28,15 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
         AlpSettings.Security.setAutoSavePattern(getApplicationContext(), true);
 
-
-        /*myReceiver = new MyReceiver();
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(communicationService.MY_ACTION);
-        registerReceiver(myReceiver, intentFilter);
-*/
-        //Start our own service
-       // intent = new Intent(this, communicationService.class);
-        //startService(intent);
+        mypattern = AlpSettings.Security.getPattern(getApplicationContext());
+        Log.e("Aashish", mypattern.toString());
 
         LockPatternActivity.IntentBuilder.newPatternComparator(getApplicationContext(), savedPattern)
                 .startForResult(this, REQ_ENTER_PATTERN);
@@ -98,12 +91,14 @@ public class MainActivity extends AppCompatActivity {
             case REQ_ENTER_PATTERN: {
                 switch (resultCode) {
                     case RESULT_OK:
-                        pattern = data.getCharArrayExtra(LockPatternActivity.EXTRA_PATTERN);
+                        //pattern = data.getCharArrayExtra(LockPatternActivity.EXTRA_PATTERN);
+                        Log.e("PATTERN", mypattern.toString());
                        // Log.e("Pankaj", pattern.toString());
                         /*String patternStr = new String(pattern);
                         savedPattern = pattern;
                         Log.e(msg, "PASSED");
-                        */intent = new Intent(this, communicationService.class);
+                        */
+                        intent = new Intent(this, communicationService.class);
                         startService(intent);
                         break;
                     case RESULT_CANCELED:
@@ -121,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                  * In any case, there's always a key EXTRA_RETRY_COUNT, which holds
                  * the number of tries that the user did.
                  */
-                int retryCount = data.getIntExtra(LockPatternActivity.EXTRA_RETRY_COUNT, 0);
+                //int retryCount = data.getIntExtra(LockPatternActivity.EXTRA_RETRY_COUNT, 0);
                 //startService(intent);
                 break;
             }// REQ_ENTER_PATTERN

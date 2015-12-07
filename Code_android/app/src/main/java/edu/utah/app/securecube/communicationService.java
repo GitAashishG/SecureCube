@@ -29,6 +29,7 @@ public class communicationService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         // Let it continue running until it is stopped.
+        Log.e("SERVICE", "Inside onStartCommand");
         Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
         return START_STICKY;
     }
@@ -36,23 +37,27 @@ public class communicationService extends Service {
     @Override
     public void onCreate(){
         try {
+            Log.e("SERVICE", "Inside onCreate");
             Thread t = new Thread(new Test());
             t.start();
         }
-        catch (Exception e){
+        catch (Exception e) {
             e.printStackTrace();
         }
+        onDestroy();
     }
     @Override
     public void onDestroy() {
+        Log.e("SERVICE", "Inside onDestroy()");
         super.onDestroy();
-        Toast.makeText(this, "Service Destroyed", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Response Sent", Toast.LENGTH_LONG).show();
     }
 
     class Test implements Runnable {
 
         @Override
         public void run() {
+            Log.e("SERVICE", "Inside run");
             try {
                 s = new ServerSocket(4040);
                 s.setReuseAddress(true);
@@ -69,15 +74,7 @@ public class communicationService extends Service {
                 if((command = br.readLine())!=null)
                     System.out.println(command);
 
-              //  Intent intent = new Intent();
-              //  intent.setAction(MY_ACTION);
-
-              //  intent.putExtra("DATAPASSED", command);
-
-               // sendBroadcast(intent);
-
-                //
-                //String token = "pattern";
+                Log.e("COMMAND", command);
                 String message;
                 MessageDigest digest = null;
                 try {
@@ -87,38 +84,29 @@ public class communicationService extends Service {
                 }
                 try {
                     digest.reset();
-                    // while(token == null){}
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 String p = "Pank\n";
-                //message = digest.digest((command + MainActivity.token).getBytes()).toString();
-                message = digest.digest((p).getBytes()).toString();
+                //message = digest.digest((command + MainActivity.mypattern).getBytes()).toString();
+                message = digest.digest((command + MainActivity.mypattern).getBytes()).toString();
+                //message = digest.digest((command).getBytes().toString());
                 Log.e("PANKAJ", message);
-                //bsender = new BufferedWriter(new OutputStreamWriter(s_a.getOutputStream()));
-                //bsender.write(message, 0, message.length());
-                //bsender.write(p+"\n", 0, 6);
-                s_a.sendUrgentData(2);
-                    /*Intent intent = new Intent();
-                    intent.setAction(communicationService.MY_ACTION);
-
-                    intent.putExtra("DATAREPLY", message);
-
-                    sendBroadcast(intent);*/
+                bsender = new BufferedWriter(new OutputStreamWriter(s_a.getOutputStream()));
+                bsender.write(message, 0,message.length());
+                bsender.newLine();
+                bsender.flush();
                 br.close();
+                bsender.close();
                 Log.e("Pankaj", p);
                 s_a.close();
-                //MyReceiver.onReceive();
+                s.close();
             }
             catch (Exception e) {
                 e.printStackTrace();
             }
+            //onDestroy();
         }
     }
 
-    //private class MyReceiver extends BroadcastReceiver {
-
-
-    //}
 }
